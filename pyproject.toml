@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "slack-channeler"
+version = "0.0.1.dev0"
+description = "Power a Slack bot with Django Channels v2"
+authors = ["Zach \"theY4Kman\" Kanzler <they4kman@gmail.com>"]
+license = 'MIT'
+readme = 'README.md'
+exclude = [
+    # This file will be generated dynamically at build time
+    "slack_channeler/version.py"
+]
+
+[tool.poetry.dependencies]
+python = ">=3.6"
+slackclient = "^2.0"
+click = "^7.0"
+channels = "^2.2"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"
+
+[tool.poetry.scripts]
+slack_channeler = "slack_channeler.cli:main"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
