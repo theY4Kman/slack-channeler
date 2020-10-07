@@ -9,7 +9,7 @@ pip install slack-channeler
 
 
 # Usage
-slack-channeler relies on the channel layer. First, ensure it's setup. [channels-redis](https://github.com/django/channels_redis) is recommended.
+slack-channeler relays slack events on the channel layer. First, ensure `CHANNEL_LAYERS` is configured in your Django settings. [channels-redis](https://github.com/django/channels_redis) is recommended.
 ```python
 # settings.py
 
@@ -21,6 +21,18 @@ CHANNEL_LAYERS = {
         },
     },
 }
+```
+
+Now, we add `slack_channeler` to `INSTALLED_APPS`, so we can run slack channeler using `manage.py`; and store our Slack token in the settings.
+```python
+# settings.py
+
+INSTALLED_APPS = [
+    # ...
+    'slack_channeler',
+]
+
+SLACK_CHANNELER_TOKEN = 'xoxb-12345678900-098765432100-DeadBeefFeed90iIJjYsf3ay'
 ```
 
 Create a consumer to handle Slack events
@@ -66,7 +78,7 @@ python manage.py runworker slack
 
 Lastly, run slack-channeler
 ```bash
-SLACK_CHANNELER_TOKEN=xoxb-12345678900-098765432100-DeadBeefFeed90iIJjYsf3ay slack_channeler
+python manage.py slack_channeler
 ```
 
 
